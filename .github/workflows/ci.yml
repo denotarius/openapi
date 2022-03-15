@@ -1,5 +1,5 @@
 jobs:
-  test_job:
+  docs:
     runs-on: ubuntu-latest
     name: Generate redoc
     steps:
@@ -13,3 +13,7 @@ jobs:
         uses: seeebiii/redoc-cli-github-action@v10
         with:
           args: 'bundle openapi.yaml'
+name: OpenAPI CI
+on:
+  - push
+  - pull_request
