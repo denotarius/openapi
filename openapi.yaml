@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: Denotarius
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://api.denotarius.io/api/v0
+paths:
+ /attestation/submit:
+  post:
+    tags:
+      - Denotarius » Attestation
+    summary: Create a new attestation request
+    description: Start a process of attestation
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ipfs:
+               type: object
+               properties:
+                 cid:
+                   type: string
+                   example: QmP22VQJ3QH8fFtw6MkhidEVSvVSWruJd5r43VndVNrCKn
+                 metadata:
+                   type: object
+                   nullable: true
+              pin_ipfs:
+                type: boolean
+                default: false
+    responses:
+      '200':
+        description: Return the details of the new attestation request.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: string
+                  example: "cf7f8e9e-36af-476a-ba83-60cb4ac17597"
+                payment:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                      example: "addr1qxqktdjvrd5vpcay6zegay98m5943sc3gya4mu694uzpw4ye9efcfa9u4hjqpgvz3cp3ar03t77pm9rqz3chqe9axhkqckdj5l"
+                    amount:
+                     type: integer
+                     example: 1200000
